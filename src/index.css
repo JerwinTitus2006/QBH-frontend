@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Existing gradient animation === */
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 5s ease infinite;
+}
+
+/* === RPG Dashboard Background === */
+.bg-game {
+  background: linear-gradient(270deg, #1a002b, #35003e, #3a0057, #0d001a);
+  background-size: 800% 800%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === Floating Particle Effect === */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  box-shadow: 0 0 10px white, 0 0 20px purple;
+  animation: floatUp 4s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-50px) scale(0.5); opacity: 0; }
+}
+
+/* === Aura Glow Effect === */
+.animate-glow {
+  animation: auraGlow 2s ease-in-out infinite;
+}
+
+@keyframes auraGlow {
+  0% { filter: drop-shadow(0 0 4px #ff00ff); }
+  50% { filter: drop-shadow(0 0 12px #ff66ff); }
+  100% { filter: drop-shadow(0 0 4px #ff00ff); }
+}
+
+/* === Optional: HP Bar Glow === */
+.hp-glow {
+  animation: hpGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes hpGlow {
+  from { box-shadow: 0 0 5px #ff0000; }
+  to { box-shadow: 0 0 15px #ff3333; }
+}
+
+/* === RPG Background for Login/Signup/Dashboard === */
+.rpg-bg {
+  background: url('/images/rpg-background.gif') center/cover no-repeat fixed;
+  position: relative;
+}
+
+.rpg-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.rpg-bg form {
+  position: relative;
+  z-index: 10;
+}
+.game-title {
+  font-family: 'Press Start 2P', cursive; /* Retro RPG style */
+  font-size: 2rem;
+  color: #ffcc00;
+  text-shadow: 2px 2px 4px #000, 0 0 10px #ffcc00, 0 0 20px #ffaa00;
+  animation: titlePulse 2s infinite alternate;
+  text-align: center;
+}
+
+@keyframes titlePulse {
+  from { text-shadow: 2px 2px 4px #000, 0 0 10px #ffcc00, 0 0 20px #ffaa00; }
+  to { text-shadow: 2px 2px 6px #000, 0 0 15px #ffee00, 0 0 30px #ffaa00; }
+}
