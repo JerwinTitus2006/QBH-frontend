@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import AddHabitForm from "../components/AddHabitForm";
 import HabitList from "../components/HabitList";
 import MonsterStatus from "../components/MonsterStatus";
