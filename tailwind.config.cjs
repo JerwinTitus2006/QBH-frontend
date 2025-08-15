@@ -3,6 +3,7 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      // Keyframes for all animations
       keyframes: {
         shake: {
           "0%, 100%": { transform: "translateX(0)" },
@@ -36,7 +37,13 @@ module.exports = {
           "50%": { opacity: "1", transform: "scale(1.2)" },
           "100%": { opacity: "0", transform: "scale(0)" },
         },
+        loginGlow: {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(255,255,255,0.2)" },
+          "50%": { boxShadow: "0 0 40px rgba(255,255,255,0.6)" },
+        },
       },
+
+      // Animations
       animation: {
         shake: "shake 0.5s ease-in-out",
         spark: "spark 0.6s linear forwards",
@@ -44,7 +51,15 @@ module.exports = {
         heal: "heal 0.5s ease-in-out",
         scrollBg: "scrollBg 60s linear infinite",
         float: "float 3s ease-in-out infinite",
-        sparkle: "sparkle 2s ease-in-out infinite",
+        sparkle: "sparkle 3s ease-in-out infinite",
+        loginGlow: "loginGlow 2s ease-in-out infinite",
+      },
+
+      // Optional: you can add custom colors or background gradients
+      colors: {
+        gamePurple: "#9b5de5",
+        gameIndigo: "#6a4c93",
+        gameBlack: "#1a1a1a",
       },
     },
   },

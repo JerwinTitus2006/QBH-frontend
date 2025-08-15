@@ -1,70 +1,69 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const Login = ({ setLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
-      localStorage.setItem("token", res.data.token);
-      setLoggedIn(true);
-    } catch (err) {
-      setError(err.response?.data?.msg || "Login failed");
-    }
+    // Dummy login for now
+    localStorage.setItem("token", "dummy-token");
+    setLoggedIn(true);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center rpg-bg">
-      {/* Game Title */}
-      <h1 className="text-4xl font-bold text-purple-400 mb-6 animate-pulse">
-        Quick Battle Habits
-      </h1>
+    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-900 via-indigo-900 to-black overflow-hidden text-white">
+
+      {/* Floating sparkles */}
+      {[...Array(30)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-1 h-1 bg-white rounded-full opacity-50 animate-sparkle"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            width: `${Math.random() * 3 + 1}px`,
+            height: `${Math.random() * 3 + 1}px`,
+          }}
+        />
+      ))}
+
+      {/* Aura Circles */}
+      <div className="absolute w-96 h-96 bg-purple-700 rounded-full opacity-20 blur-3xl animate-glow"></div>
+      <div className="absolute w-72 h-72 bg-indigo-700 rounded-full opacity-20 blur-2xl animate-glow"></div>
 
       {/* Login Form */}
-      <form
-        onSubmit={handleSubmit}
-        className="bg-black/70 border border-purple-500/50 p-8 rounded-2xl shadow-2xl w-80 
-                   transform transition-transform hover:scale-105 backdrop-blur-md"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center text-purple-400 animate-pulse">
-          Login
-        </h2>
-        {error && <p className="text-red-400 mb-3">{error}</p>}
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full mb-4 px-4 py-2 rounded-lg bg-black/60 text-white 
-                     border border-purple-500/50 placeholder-gray-400
-                     focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-4 px-4 py-2 rounded-lg bg-black/60 text-white 
-                     border border-purple-500/50 placeholder-gray-400
-                     focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
-          required
-        />
-        <button
-          type="submit"
-          className="w-full bg-purple-600 text-white py-2 rounded-lg 
-                     hover:bg-purple-700 transition transform hover:scale-105 shadow-lg"
-        >
-          Login
-        </button>
-      </form>
+      <div className="relative z-10 w-full max-w-md p-8 bg-black/50 rounded-xl shadow-xl backdrop-blur-md border border-purple-500">
+        <h1 className="text-3xl font-bold text-center mb-6 text-purple-400 animate-pulse">
+          Quick Battle Habits
+        </h1>
+
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="p-3 rounded-md bg-black/70 border border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="p-3 rounded-md bg-black/70 border border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            required
+          />
+          <button
+            type="submit"
+            className="mt-4 bg-purple-500 hover:bg-purple-700 py-2 px-4 rounded-md font-bold transition-all duration-300"
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

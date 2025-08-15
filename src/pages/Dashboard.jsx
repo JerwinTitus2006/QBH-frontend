@@ -15,7 +15,7 @@ const Dashboard = ({ setLoggedIn }) => {
 
   const fetchHabits = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/habits", config);
+      const res = await axios.get("https://qbh-backend.onrender.com/api/habits", config);
       setHabits(res.data);
     } catch (err) {
       console.error(err);
@@ -25,7 +25,7 @@ const Dashboard = ({ setLoggedIn }) => {
   const fetchMonster = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/monster/hp",
+        "https://qbh-backend.onrender.com/api/monster/hp",
         config
       );
       setMonster(res.data);
@@ -42,7 +42,7 @@ const Dashboard = ({ setLoggedIn }) => {
   const addHabit = async (name) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/habits",
+        "https://qbh-backend.onrender.com/api/habits",
         { name },
         config
       );
@@ -56,7 +56,7 @@ const Dashboard = ({ setLoggedIn }) => {
   const toggleCompleted = async (id, completed) => {
     try {
       const res = await axios.patch(
-        `http://localhost:5000/api/habits/${id}`,
+        `https://qbh-backend.onrender.com/api/habits/${id}`,
         { completed },
         config
       );
@@ -70,7 +70,7 @@ const Dashboard = ({ setLoggedIn }) => {
   const deleteHabit = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/habits/${id}`,
+        `https://qbh-backend.onrender.com/api/habits/${id}`,
         config
       );
       setHabits(habits.filter((h) => h._id !== id));
@@ -78,6 +78,12 @@ const Dashboard = ({ setLoggedIn }) => {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  // Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setLoggedIn(false);
   };
 
   return (
@@ -97,6 +103,16 @@ const Dashboard = ({ setLoggedIn }) => {
 
       {/* Navbar */}
       <Navbar />
+
+      {/* Logout Button */}
+      <div className="absolute top-4 right-4 z-20">
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+        >
+          Logout
+        </button>
+      </div>
 
       {/* Game Title */}
       <h1 className="game-title text-4xl font-bold text-purple-400 text-center pt-6 animate-pulse">
